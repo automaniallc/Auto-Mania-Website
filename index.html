@@ -1225,7 +1225,17 @@
     document.getElementById('calcDeposit').textContent = fmt(deposit);
     document.getElementById('calcTotal').innerHTML = fmt(dueAtBooking) + '<span class="per">due at booking</span>';
     document.getElementById('calcMonthly').textContent = 'then ' + fmt(weekly) + '/wk · ≈ ' + fmt(monthly) + '/mo';
+
+    if (cMsgIsAuto) {
+      cMsg.value = "I'm interested in the " + v.name + ' (' + v.years + ') with ' + t.name + ' and the ' + m.name + ' plan (~' + fmt(weekly) + '/wk).';
+    }
   }
+
+  // message field starts pre-filled from the calculator; once the customer types
+  // their own edit, stop overwriting it so their changes stick
+  var cMsg = document.getElementById('cMsg');
+  var cMsgIsAuto = true;
+  cMsg.addEventListener('input', function(){ cMsgIsAuto = false; });
 
   calcVehicle.addEventListener('change', updateCalc);
   tierRadios.forEach(function(r){ r.addEventListener('change', updateCalc); });
@@ -1255,6 +1265,8 @@
         if (data.success) {
           formMsg.classList.add('show');
           form.reset();
+          cMsgIsAuto = true;
+          updateCalc();
         } else {
           formMsgError.classList.add('show');
         }
