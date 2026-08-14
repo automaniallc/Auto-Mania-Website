@@ -445,8 +445,25 @@
   .tp-add{font-family:var(--font-mono);font-size:.78rem;color:var(--accent-strong);}
   .tp-note{font-size:.72rem;color:var(--ink-muted);}
 
+  .pricing-card{
+    margin-top:32px;background:var(--surface);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;
+  }
+  .pricing-card summary{
+    cursor:pointer;list-style:none;padding:24px 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .pricing-card summary::-webkit-details-marker{display:none;}
+  .pricing-card summary strong{display:block;font-size:1.05rem;color:var(--ink);}
+  .pricing-card summary .pc-sub{display:block;font-size:.85rem;color:var(--ink-muted);margin-top:4px;font-weight:400;}
+  .pricing-card summary .plus{
+    font-family:var(--font-mono);font-size:1.5rem;color:var(--accent-strong);flex:none;
+    transition:transform .15s ease;
+  }
+  @media (prefers-reduced-motion: reduce){ .pricing-card summary .plus{transition:none;} }
+  .pricing-card[open] summary .plus{transform:rotate(45deg);}
+  .pricing-card[open] summary{border-bottom:1px solid var(--line);}
   .calc{
-    margin-top:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;
     padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;
   }
   @media (max-width:800px){.calc{grid-template-columns:1fr;padding:24px;}}
@@ -734,6 +751,14 @@
         <p>Illinois liability coverage is included on every lease. Pick your vehicle, coverage, and mileage below to see your exact price — updates live.</p>
       </div>
 
+      <details class="pricing-card">
+        <summary>
+          <span>
+            <strong>See pricing &amp; coverage options</strong>
+            <span class="pc-sub">Starting at $259/wk — pick your vehicle, coverage, and mileage</span>
+          </span>
+          <span class="plus">+</span>
+        </summary>
       <div class="calc">
         <div>
           <div class="calc-field">
@@ -809,6 +834,7 @@
           </div>
         </div>
       </div>
+      </details>
     </div>
   </section>
 
