@@ -153,7 +153,8 @@
   }
   section{padding-block:48px;}
   @media (max-width:720px){
-    section{padding-block:32px;}
+    section{padding-block:26px;}
+    .sticker-row.hide-mobile{display:none;}
   }
 
   .eyebrow{
@@ -333,6 +334,7 @@
     display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start;
   }
   @media (max-width:900px){ .hero .wrap{grid-template-columns:1fr;} }
+  @media (max-width:640px){ .hero-aside{display:none;} }
   .hero h1{
     font-size:clamp(2.6rem,5.4vw + 1rem,4.6rem);
     line-height:.96;
@@ -360,7 +362,8 @@
   .hero-aside .plate{margin-bottom:14px;}
 
   .road-banner{padding-block:0;line-height:0;}
-  .road-banner svg{display:block;width:100%;height:clamp(160px,26vw,320px);}
+  .road-banner svg{display:block;width:100%;height:clamp(110px,26vw,320px);}
+  @media (max-width:560px){.road-banner svg{height:100px;}}
 
   /* ---------- how it works ---------- */
   .how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px;}
@@ -436,8 +439,16 @@
   .tier-card ul{color:var(--ink-muted);font-size:.85rem;display:flex;flex-direction:column;gap:5px;}
   .tier-card ul li::before{content:"— ";color:var(--ink-muted);}
 
+  .calc-details{margin-top:28px;}
+  .calc-details summary{
+    cursor:pointer;font-weight:700;font-size:1rem;list-style:none;
+    display:flex;align-items:center;gap:10px;color:var(--accent-strong);
+  }
+  .calc-details summary::-webkit-details-marker{display:none;}
+  .calc-details summary .plus{font-family:var(--font-mono);font-size:1.2rem;transition:transform .15s ease;}
+  .calc-details[open] summary .plus{transform:rotate(45deg);}
   .calc{
-    margin-top:48px;background:var(--surface);border:1px solid var(--line);border-radius:16px;
+    margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:16px;
     padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;
   }
   @media (max-width:800px){.calc{grid-template-columns:1fr;padding:24px;}}
@@ -585,15 +596,15 @@
       <div class="hero-main">
         <span class="eyebrow">● Des Plaines, IL — 5 min from O'Hare</span>
         <h1>Lease your ride.<br><em>Local. Insured. Flexible terms.</em></h1>
-        <p class="lede">Auto Mania puts Chicagoland drivers behind the wheel on a 4-week minimum term, then week to week — for the daily commute or the daily grind. Illinois liability insurance comes standard on every lease.</p>
+        <p class="lede">4-week minimum term, then week to week. Illinois liability insurance included on every lease.</p>
 
         <div class="path-toggle" role="group" aria-label="Choose your leasing path">
           <button type="button" data-path-btn="personal" aria-pressed="true">Personal Driving</button>
           <button type="button" data-path-btn="gig" aria-pressed="false">Gig &amp; Rideshare</button>
         </div>
 
-        <p class="lede personal-only" style="font-size:.98rem;margin-bottom:24px;">Everyday, reliable transportation with no multi-year commitment — perfect if you're between cars or don't want the hassle of ownership.</p>
-        <p class="lede gig-only" style="font-size:.98rem;margin-bottom:24px;">Vehicles ready for rideshare and delivery apps, with flexible weekly terms that scale with your schedule — not a lender's calendar. Note that rideshare/delivery coverage typically costs more to insure than personal use.</p>
+        <p class="lede personal-only" style="font-size:.98rem;margin-bottom:24px;">No multi-year commitment — perfect if you're between cars or don't want the hassle of ownership.</p>
+        <p class="lede gig-only" style="font-size:.98rem;margin-bottom:24px;">Ready for rideshare and delivery apps, with flexible weekly terms that scale with your schedule.</p>
 
         <div class="hero-ctas">
           <a class="btn btn-primary" href="#fleet">See Available Vehicles</a>
@@ -722,7 +733,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Insurance &amp; pricing</h2>
-        <p>Every Auto Mania lease includes Illinois-required liability coverage at no extra cost. Want more protection for the vehicle itself? Add full coverage in two tiers.</p>
+        <p>Illinois liability coverage is included on every lease. Add full coverage for more protection.</p>
       </div>
 
       <div class="tier-grid" role="radiogroup" aria-label="Insurance coverage tier">
@@ -762,8 +773,10 @@
           </ul>
         </label>
       </div>
-      <p class="pricing-note">Coverage add-on prices above are starting estimates — your final rate depends on insurance approval (driving history, vehicle, and other underwriting factors). Rideshare and delivery use typically costs more to insure than personal driving, so gig-path quotes usually run higher than the personal-path estimate for the same tier.</p>
+      <p class="pricing-note">Prices above are starting estimates — final rate depends on insurance approval. Rideshare/delivery use typically costs more to insure than personal driving.</p>
 
+      <details class="calc-details">
+        <summary>Calculate your exact price <span class="plus">+</span></summary>
       <div class="calc">
         <div>
           <div class="calc-field">
@@ -789,6 +802,7 @@
           </div>
         </div>
       </div>
+      </details>
     </div>
   </section>
 
@@ -800,11 +814,6 @@
       </div>
       <div class="why-grid">
         <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          <h3>Locally owned &amp; operated</h3>
-          <p>Based in Des Plaines — walk in, talk to a person, get your keys.</p>
-        </div>
-        <div class="why-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           <h3>Insurance included</h3>
           <p>Illinois liability coverage on every lease, no separate policy to arrange.</p>
@@ -813,16 +822,6 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           <h3>Flexible terms after 4 weeks</h3>
           <p>4-week minimum, then week to week. Step away whenever your plans change.</p>
-        </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          <h3>Maintenance included</h3>
-          <p>Routine service and repairs are handled — you just drive.</p>
-        </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h4l3 3v5h-7z"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>
-          <h3>5 minutes from O'Hare</h3>
-          <p>Easy pickup, easy airport runs — built for drivers who stay moving.</p>
         </div>
         <div class="why-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
@@ -906,28 +905,6 @@
     </div>
   </section>
 
-  <section class="section-alt">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>What Chicagoland drivers say</h2>
-      </div>
-      <div class="quote-grid">
-        <div class="quote-card">
-          <p>"Picked up my Camry in Des Plaines on a Tuesday, was doing airport runs by Thursday. No dealership runaround."</p>
-          <cite>Marcus T. <span class="role">· Rideshare driver, Rosemont</span></cite>
-        </div>
-        <div class="quote-card">
-          <p>"Needed a car for three months while mine got fixed. Weekly terms meant I wasn't stuck in anything long."</p>
-          <cite>Priya S. <span class="role">· Personal lease, Des Plaines</span></cite>
-        </div>
-        <div class="quote-card">
-          <p>"Added the Plus coverage for the deductible alone — worth it doing delivery runs all winter on Chicago streets."</p>
-          <cite>Derek W. <span class="role">· Delivery driver, Chicago NW Side</span></cite>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="faq">
     <div class="wrap">
       <div class="section-head">
@@ -943,10 +920,6 @@
           <p>Yes. You can move between Liability Only, Standard, and Plus at the start of any billing week — just let us know before your renewal.</p>
         </details>
         <details>
-          <summary>Why does the price shown online differ from my final quote? <span class="plus">+</span></summary>
-          <p>The rates shown throughout this site are starting estimates. Your actual insurance cost depends on approval — factors like driving history, the vehicle, and how it's used. Rideshare and delivery driving typically costs more to insure than personal use, so if you're leasing for gig work, expect your final coverage rate to run higher than the personal-path estimate for the same tier.</p>
-        </details>
-        <details>
           <summary>Is there a mileage limit? <span class="plus">+</span></summary>
           <p>Each lease includes 250 miles per week. Additional miles are billed at a per-mile rate — ask us for the current rate for your vehicle.</p>
         </details>
@@ -957,10 +930,6 @@
         <details>
           <summary>Can I use an Auto Mania lease for rideshare or delivery apps? <span class="plus">+</span></summary>
           <p>Yes — our vehicles are set up for gig and rideshare work. Bring your active or pending driver account when you come in.</p>
-        </details>
-        <details>
-          <summary>What do I need to qualify? <span class="plus">+</span></summary>
-          <p>A valid Illinois driver's license, proof of income or an active gig-app account, and a refundable security deposit. See the "What you'll need" section above for the full list.</p>
         </details>
         <details>
           <summary>Can I end my lease early? <span class="plus">+</span></summary>
@@ -1164,7 +1133,7 @@
             '<ul class="spec-list">' + specItems + '</ul>' +
             '<div class="sticker mini-sticker">' +
               '<div class="sticker-row"><span>Weekly rate</span><span class="leader"></span><span class="val">' + fmt(v.price) + '/wk</span></div>' +
-              '<div class="sticker-row"><span>Liability insurance</span><span class="leader"></span><span class="val">Included</span></div>' +
+              '<div class="sticker-row hide-mobile"><span>Liability insurance</span><span class="leader"></span><span class="val">Included</span></div>' +
               '<div class="sticker-row"><span>Security deposit</span><span class="leader"></span><span class="val">' + fmt(deposit) + '</span></div>' +
               '<div class="sticker-total"><div><div class="amt">' + fmt(dueAtPickup) + '<span class="per">/due at pickup</span></div></div></div>' +
             '</div>' +
