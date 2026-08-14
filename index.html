@@ -335,12 +335,20 @@
   }
   @media (max-width:900px){ .hero .wrap{grid-template-columns:1fr;} }
   @media (max-width:640px){ .hero-aside{display:none;} }
-  .hero h1{
-    font-size:clamp(2.6rem,5.4vw + 1rem,4.6rem);
-    line-height:.96;
-    margin-block:18px 20px;
+  .hero-brand{
+    font-family:var(--font-display);font-weight:800;text-transform:uppercase;
+    font-size:clamp(3.4rem,8vw + 1rem,7.2rem);
+    line-height:.9;letter-spacing:.01em;
+    color:var(--accent-strong);
+    margin:14px 0 4px;
   }
-  .hero h1 em{color:var(--accent-strong);font-style:normal;}
+  .hero h1{
+    font-size:clamp(1.7rem,2.6vw + 1rem,2.7rem);
+    line-height:1.05;
+    margin-block:0 20px;
+    color:var(--ink-muted);
+  }
+  .hero h1 em{color:var(--ink);font-style:normal;}
   .hero p.lede{font-size:1.1rem;color:var(--ink-muted);margin-bottom:28px;}
 
   .path-toggle{
@@ -595,6 +603,7 @@
     <div class="wrap">
       <div class="hero-main">
         <span class="eyebrow">● Des Plaines, IL — 5 min from O'Hare</span>
+        <p class="hero-brand">Auto Mania</p>
         <h1>Lease your ride.<br><em>Local. Insured. Flexible terms.</em></h1>
         <p class="lede">4-week minimum term, then week to week. Illinois liability insurance included on every lease.</p>
 
