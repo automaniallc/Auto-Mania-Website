@@ -462,6 +462,17 @@
   @media (max-width:800px){.calc{grid-template-columns:1fr;padding:24px;}}
   .calc-field{margin-bottom:18px;}
   .calc-field label{display:block;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px;}
+  .mileage-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+  .mileage-option{
+    background:var(--bg);border:1.5px solid var(--line);border-radius:9px;padding:9px 12px;
+    cursor:pointer;position:relative;display:flex;flex-direction:column;gap:1px;transition:border-color .15s ease;
+  }
+  @media (prefers-reduced-motion: reduce){ .mileage-option{transition:none;} }
+  .mileage-option:hover{border-color:var(--accent);}
+  .mileage-option input{position:absolute;opacity:0;pointer-events:none;}
+  .mileage-option:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft);}
+  .mo-name{font-weight:700;font-size:.88rem;}
+  .mo-add{font-family:var(--font-mono);font-size:.76rem;color:var(--accent-strong);}
   select{
     width:100%;font:inherit;font-weight:600;padding:12px 14px;border-radius:9px;
     border:1.5px solid var(--line);background:var(--bg);color:var(--ink);
@@ -637,7 +648,7 @@
           <div class="sticker-row"><span>Weekly rate</span><span class="leader"></span><span class="val">$279/wk</span></div>
           <div class="sticker-row"><span>Liability insurance</span><span class="leader"></span><span class="val">Included</span></div>
           <div class="sticker-row"><span>Security deposit</span><span class="leader"></span><span class="val">$279</span></div>
-          <div class="sticker-row"><span>Mileage</span><span class="leader"></span><span class="val">250 mi/wk</span></div>
+          <div class="sticker-row"><span>Mileage</span><span class="leader"></span><span class="val">1,000 mi/wk</span></div>
           <div class="sticker-row"><span>Minimum term</span><span class="leader"></span><span class="val">4 weeks</span></div>
           <div class="sticker-total">
             <div>
@@ -792,7 +803,32 @@
             <label for="calcVehicle">Vehicle</label>
             <select id="calcVehicle"></select>
           </div>
-          <p style="font-size:.85rem;color:var(--ink-muted);">Pick a vehicle and a coverage tier above — your estimate updates on the right.</p>
+          <div class="calc-field">
+            <label>Mileage plan</label>
+            <div class="mileage-grid" role="radiogroup" aria-label="Mileage plan">
+              <label class="mileage-option">
+                <input type="radio" name="mileage" value="base" data-addon="0" checked>
+                <span class="mo-name">1,000 mi/wk</span>
+                <span class="mo-add">Included</span>
+              </label>
+              <label class="mileage-option">
+                <input type="radio" name="mileage" value="plus" data-addon="15">
+                <span class="mo-name">1,200 mi/wk</span>
+                <span class="mo-add">+$15/wk</span>
+              </label>
+              <label class="mileage-option">
+                <input type="radio" name="mileage" value="high" data-addon="30">
+                <span class="mo-name">1,500 mi/wk</span>
+                <span class="mo-add">+$30/wk</span>
+              </label>
+              <label class="mileage-option">
+                <input type="radio" name="mileage" value="unlimited" data-addon="45">
+                <span class="mo-name">Unlimited</span>
+                <span class="mo-add">+$45/wk</span>
+              </label>
+            </div>
+          </div>
+          <p style="font-size:.85rem;color:var(--ink-muted);">Pick a vehicle, coverage tier, and mileage plan — your estimate updates on the right.</p>
         </div>
         <div class="sticker" id="calcSticker">
           <div class="sticker-head">
@@ -801,6 +837,8 @@
           </div>
           <div class="sticker-row"><span>Base rate</span><span class="leader"></span><span class="val" id="calcBase">$279/wk</span></div>
           <div class="sticker-row"><span>Coverage add-on</span><span class="leader"></span><span class="val" id="calcAddon">+$0/wk</span></div>
+          <div class="sticker-row"><span>Mileage plan</span><span class="leader"></span><span class="val" id="calcMileageName">1,000 mi/wk</span></div>
+          <div class="sticker-row"><span>Mileage add-on</span><span class="leader"></span><span class="val" id="calcMileageAddon">+$0/wk</span></div>
           <div class="sticker-row"><span>Weekly total</span><span class="leader"></span><span class="val" id="calcWeekly">$279/wk</span></div>
           <div class="sticker-row"><span>Security deposit</span><span class="leader"></span><span class="val" id="calcDeposit">$279</span></div>
           <div class="sticker-total">
@@ -930,7 +968,7 @@
         </details>
         <details>
           <summary>Is there a mileage limit? <span class="plus">+</span></summary>
-          <p>Each lease includes 250 miles per week. Additional miles are billed at a per-mile rate — ask us for the current rate for your vehicle.</p>
+          <p>Every lease starts with 1,000 miles per week included. Need more? Upgrade to 1,200 mi/wk (+$15/wk), 1,500 mi/wk (+$30/wk), or unlimited mileage (+$45/wk) — same add-on pricing across every vehicle. Pick your plan in the calculator in the Insurance &amp; Pricing section above.</p>
         </details>
         <details>
           <summary>How much is the deposit, and do I get it back? <span class="plus">+</span></summary>
@@ -1128,6 +1166,13 @@
     plus:      { name: 'Full Coverage — Plus', addon: 65 }
   };
 
+  var mileageData = {
+    base:      { name: '1,000 mi/wk', addon: 0 },
+    plus:      { name: '1,200 mi/wk', addon: 15 },
+    high:      { name: '1,500 mi/wk', addon: 30 },
+    unlimited: { name: 'Unlimited mi/wk', addon: 45 }
+  };
+
   function renderFleet(){
     var grid = document.getElementById('fleetGrid');
     var available = VEHICLES.filter(function(v){ return v.available !== false; });
@@ -1181,14 +1226,17 @@
   // insurance calculator
   var calcVehicle = document.getElementById('calcVehicle');
   var tierRadios = document.querySelectorAll('input[name="tier"]');
+  var mileageRadios = document.querySelectorAll('input[name="mileage"]');
 
   function updateCalc(){
     var vKey = calcVehicle.value;
     var tKey = document.querySelector('input[name="tier"]:checked').value;
+    var mKey = document.querySelector('input[name="mileage"]:checked').value;
     var v = VEHICLES.find(function(x){ return x.id === vKey; });
     var t = tierData[tKey];
-    if (!v || !t) { return; }
-    var weekly = v.price + t.addon;
+    var m = mileageData[mKey];
+    if (!v || !t || !m) { return; }
+    var weekly = v.price + t.addon + m.addon;
     var deposit = v.price;
     var dueAtBooking = weekly + deposit;
     var monthly = Math.round(weekly * 4.33);
@@ -1197,6 +1245,8 @@
     document.getElementById('calcTierName').textContent = t.name;
     document.getElementById('calcBase').textContent = fmt(v.price) + '/wk';
     document.getElementById('calcAddon').textContent = (t.addon > 0 ? '+' + fmt(t.addon) : fmt(0)) + '/wk';
+    document.getElementById('calcMileageName').textContent = m.name;
+    document.getElementById('calcMileageAddon').textContent = (m.addon > 0 ? '+' + fmt(m.addon) : fmt(0)) + '/wk';
     document.getElementById('calcWeekly').textContent = fmt(weekly) + '/wk';
     document.getElementById('calcDeposit').textContent = fmt(deposit);
     document.getElementById('calcTotal').innerHTML = fmt(dueAtBooking) + '<span class="per">due at booking</span>';
@@ -1205,6 +1255,7 @@
 
   calcVehicle.addEventListener('change', updateCalc);
   tierRadios.forEach(function(r){ r.addEventListener('change', updateCalc); });
+  mileageRadios.forEach(function(r){ r.addEventListener('change', updateCalc); });
   updateCalc();
 
   // contact form — submits to Web3Forms (web3forms.com), no backend required
