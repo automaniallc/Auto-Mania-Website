@@ -342,7 +342,6 @@
     position:relative;z-index:1;
   }
   @media (max-width:900px){ .hero .wrap{grid-template-columns:1fr;} }
-  @media (max-width:640px){ .hero-aside{display:none;} }
   .hero-brand{
     font-family:var(--font-display);font-weight:800;text-transform:uppercase;
     font-size:clamp(3.4rem,8vw + 1rem,7.2rem);
@@ -386,7 +385,8 @@
   .trust-row div{display:flex;align-items:center;gap:9px;font-size:.85rem;color:var(--ink-muted);}
   .trust-row .check{width:15px;height:15px;color:var(--accent);flex:none;}
 
-  .hero-aside{position:relative;}
+  .hero-aside{position:relative;display:flex;flex-direction:column;justify-content:center;}
+  @media (max-width:640px){ .hero-aside{display:none;} }
   .hero-aside::before{
     content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;
     background-image:radial-gradient(var(--line) 1.6px, transparent 1.6px);
@@ -400,11 +400,10 @@
   @media (max-width:1100px){.hero-aside::after{display:none;}}
   .hero-photo{
     position:relative;border-radius:16px;overflow:hidden;
-    background:var(--accent-soft);z-index:1;
-    height:100%;min-height:340px;
+    background:#F4F4F4;z-index:1;
+    aspect-ratio:3/2;width:100%;
   }
-  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block;}
-  @media (max-width:900px){ .hero-photo{height:auto;aspect-ratio:4/3;min-height:0;} }
+  .hero-photo img{width:100%;height:100%;object-fit:contain;display:block;}
   .hero-photo-badge{
     position:absolute;top:12px;right:12px;max-width:190px;
     background:var(--surface);border-radius:12px;box-shadow:var(--shadow);
@@ -747,7 +746,7 @@
 
       <aside class="hero-aside">
         <div class="hero-photo">
-          <img src="images/toyota-prius.jpg" alt="Toyota Prius available to lease at Auto Mania" width="1400" height="788" loading="eager">
+          <img src="images/hero-prius-front.jpg" alt="Toyota Prius available to lease at Auto Mania, front three-quarter view" width="1400" height="933" loading="eager">
           <span class="hero-photo-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             Illinois liability insurance included on every lease
