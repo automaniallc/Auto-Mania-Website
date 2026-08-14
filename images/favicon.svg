@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="55 15 370 340">
+  <circle cx="240" cy="185" r="168" fill="#0E7C63"/>
+  <circle cx="240" cy="185" r="150" fill="none" stroke="#F4F1EA" stroke-width="14"/>
+  <path d="M120,208 Q100,215 92,200" fill="none" stroke="#F4F1EA" stroke-width="20" stroke-linecap="round"/>
+  <path d="M120,208 Q165,148 228,132 Q265,123 288,95 Q308,68 350,78 Q378,85 400,108" fill="none" stroke="#F4F1EA" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="400" cy="108" r="16" fill="#F4F1EA"/>
+  <text x="240" y="305" font-family="Arial, sans-serif" font-weight="800" font-size="100" letter-spacing="2" fill="#F4F1EA" text-anchor="middle">AM</text>
+</svg>
