@@ -159,13 +159,20 @@
   .eyebrow{
     display:inline-flex;
     align-items:center;
-    gap:.5em;
+    gap:7px;
     font-family:var(--font-mono);
     font-size:.75rem;
-    letter-spacing:.14em;
+    letter-spacing:.1em;
     text-transform:uppercase;
     color:var(--accent-strong);
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:8px 16px;
+    box-shadow:var(--shadow);
+    margin-bottom:16px;
   }
+  .eyebrow svg{width:14px;height:14px;flex:none;}
 
   /* ---------- plate badge ---------- */
   .plate{
@@ -360,21 +367,49 @@
   .hero h1 em{color:var(--ink);font-style:normal;}
   .hero p.lede{font-size:1.1rem;color:var(--ink-muted);margin-bottom:28px;}
 
+  .hero-heading{border-left:3px solid var(--accent);padding-left:20px;}
+
+  .hero-features{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:26px;}
+  .hero-feature{display:flex;align-items:flex-start;gap:10px;flex:1 1 150px;min-width:140px;}
+  .hero-feature svg{width:20px;height:20px;color:var(--accent);flex:none;margin-top:2px;}
+  .hero-feature h4{font-size:.86rem;text-transform:none;margin-bottom:2px;}
+  .hero-feature p{font-size:.78rem;color:var(--ink-muted);margin:0;max-width:none;}
+
   .path-toggle{
     display:inline-flex;padding:4px;border-radius:999px;background:var(--surface-alt);
     border:1px solid var(--line);margin-bottom:22px;
   }
   .path-toggle button{
+    display:inline-flex;align-items:center;gap:7px;
     border:none;background:none;padding:9px 20px;border-radius:999px;
     font-weight:700;font-size:.88rem;cursor:pointer;color:var(--ink-muted);
   }
+  .path-toggle button svg{width:16px;height:16px;flex:none;}
   .path-toggle button[aria-pressed="true"]{background:var(--surface);color:var(--accent-strong);box-shadow:var(--shadow);}
 
   .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:34px;}
+  .hero-ctas .btn svg{width:16px;height:16px;flex:none;}
 
   .trust-row{display:flex;flex-wrap:wrap;gap:22px;}
   .trust-row div{display:flex;align-items:center;gap:9px;font-size:.85rem;color:var(--ink-muted);}
-  .trust-row .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;}
+  .trust-row .check{width:15px;height:15px;color:var(--accent);flex:none;}
+
+  .hero-aside{position:relative;}
+  .hero-aside::before{
+    content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;
+    background-image:radial-gradient(var(--line) 1.6px, transparent 1.6px);
+    background-size:13px 13px;opacity:.7;pointer-events:none;z-index:0;
+  }
+  .hero-photo{position:relative;border-radius:16px;overflow:hidden;margin-bottom:16px;background:var(--accent-soft);z-index:1;}
+  .hero-photo img{width:100%;height:auto;display:block;}
+  .hero-photo-badge{
+    position:absolute;top:12px;right:12px;max-width:190px;
+    background:var(--surface);border-radius:12px;box-shadow:var(--shadow);
+    padding:10px 12px;display:flex;align-items:flex-start;gap:8px;
+    font-size:.72rem;font-weight:600;color:var(--ink);line-height:1.35;
+  }
+  .hero-photo-badge svg{width:16px;height:16px;color:var(--accent);flex:none;margin-top:1px;}
+  @media (max-width:1100px){.hero-photo-badge{display:none;}}
 
   .hero-aside .plate{margin-bottom:14px;}
 
@@ -649,33 +684,57 @@
   <section class="hero" id="top">
     <div class="wrap">
       <div class="hero-main">
-        <span class="eyebrow">● Des Plaines, IL — 5 min from O'Hare</span>
-        <p class="hero-brand">Auto Mania</p>
-        <h1>Lease your ride.<br><em>Local. Insured. Flexible terms.</em></h1>
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Des Plaines, IL — 5 min from O'Hare</span>
+        <div class="hero-heading">
+          <p class="hero-brand">Auto Mania</p>
+          <h1>Lease your ride.<br><em>Local. Insured. Flexible terms.</em></h1>
+        </div>
         <p class="lede">4-week minimum term, then week to week. Illinois liability insurance included on every lease.</p>
 
+        <div class="hero-features">
+          <div class="hero-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div><h4>Fully insured</h4><p>Illinois liability included</p></div>
+          </div>
+          <div class="hero-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <div><h4>Flexible terms</h4><p>4-week minimum, then week to week</p></div>
+          </div>
+          <div class="hero-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><h4>Local &amp; trusted</h4><p>Des Plaines, 5 min from O'Hare</p></div>
+          </div>
+        </div>
+
         <div class="path-toggle" role="group" aria-label="Choose your leasing path">
-          <button type="button" data-path-btn="personal" aria-pressed="true">Personal Driving</button>
-          <button type="button" data-path-btn="gig" aria-pressed="false">Gig &amp; Rideshare</button>
+          <button type="button" data-path-btn="personal" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Personal Driving</button>
+          <button type="button" data-path-btn="gig" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l1.5-4.5A2 2 0 0 1 6.4 7h11.2a2 2 0 0 1 1.9 1.5L21 13"/><rect x="2" y="13" width="20" height="5" rx="1.5"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>Gig &amp; Rideshare</button>
         </div>
 
         <p class="lede personal-only" style="font-size:.98rem;margin-bottom:24px;">No multi-year commitment — perfect if you're between cars or don't want the hassle of ownership.</p>
         <p class="lede gig-only" style="font-size:.98rem;margin-bottom:24px;">Ready for rideshare and delivery apps, with flexible weekly terms that scale with your schedule.</p>
 
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="#fleet">See Available Vehicles</a>
-          <a class="btn btn-ghost" href="tel:12247155835">Call (224) 715-5835</a>
+          <a class="btn btn-primary" href="#fleet">See Available Vehicles<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="tel:12247155835"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call (224) 715-5835</a>
         </div>
 
         <div class="trust-row">
-          <div><span class="dot"></span>Liability insurance included</div>
-          <div><span class="dot"></span>4-week minimum term</div>
-          <div><span class="dot"></span>Same-day approval available</div>
-          <div><span class="dot"></span>Unlimited mileage available</div>
+          <div><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Liability insurance included</div>
+          <div><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>4-week minimum term</div>
+          <div><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Same-day approval available</div>
+          <div><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Unlimited mileage available</div>
         </div>
       </div>
 
       <aside class="hero-aside">
+        <div class="hero-photo">
+          <img src="images/toyota-prius.jpg" alt="Toyota Prius available to lease at Auto Mania" width="1400" height="788" loading="eager">
+          <span class="hero-photo-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Illinois liability insurance included on every lease
+          </span>
+        </div>
         <span class="plate">AM · LEASE ESTIMATE</span>
         <div class="sticker" style="margin-top:14px;">
           <div class="sticker-head">
