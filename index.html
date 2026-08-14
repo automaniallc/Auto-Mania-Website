@@ -1099,22 +1099,26 @@
   // To add a car: add one entry below and drop its photo in images/.
   // To swap a photo: replace the file at that path, or point img at a new one.
   // To remove a car: delete its entry.
+  // To mark a car as currently rented out: change its "available: true" to "available: false"
+  //   (it disappears from the site until you flip it back to true — no other edits needed).
   var VEHICLES = [
     {
       id: 'prius', name: 'Toyota Prius', years: '2010–2015', type: 'Hybrid Liftback',
       specs: ['48/45 MPG', '5 seats', 'Auto'], price: 259, plate: 'AM-PRI',
-      img: 'images/toyota-prius.jpg', alt: 'Toyota Prius, silver, parked', tint: '#DCEFE9'
+      img: 'images/toyota-prius.jpg', alt: 'Toyota Prius, silver, parked', tint: '#DCEFE9',
+      available: true
     },
     {
       id: 'camry', name: 'Toyota Camry', years: '2012', type: 'Hybrid Sedan',
       specs: ['43/39 MPG', '5 seats', 'Auto'], price: 279, plate: 'AM-CAM',
       img: 'images/toyota-camry.jpg', alt: 'Toyota Camry Hybrid, silver, parked', tint: '#E7EFEC',
-      isDefault: true
+      isDefault: true, available: true
     },
     {
       id: 'avalon', name: 'Toyota Avalon', years: '2013–2016', type: 'Hybrid Full-size Sedan',
       specs: ['40/39 MPG', '5 seats', 'Auto'], price: 299, plate: 'AM-AVL',
-      img: 'images/toyota-avalon.jpg', alt: 'Toyota Avalon Hybrid, silver, parked', tint: '#D3E1DC'
+      img: 'images/toyota-avalon.jpg', alt: 'Toyota Avalon Hybrid, silver, parked', tint: '#D3E1DC',
+      available: true
     }
   ];
 
@@ -1126,7 +1130,13 @@
 
   function renderFleet(){
     var grid = document.getElementById('fleetGrid');
-    grid.innerHTML = VEHICLES.map(function(v){
+    var available = VEHICLES.filter(function(v){ return v.available !== false; });
+    if (available.length === 0) {
+      grid.innerHTML = '<p class="photo-note" style="grid-column:1/-1;">All vehicles are currently leased — call ' +
+        '<a href="tel:12247155835" style="color:inherit;text-decoration:underline;">(224) 715-5835</a> to check upcoming availability.</p>';
+      return;
+    }
+    grid.innerHTML = available.map(function(v){
       var deposit = v.price;
       var dueAtPickup = v.price + deposit;
       var specItems = v.specs.map(function(s){ return '<li>' + s + '</li>'; }).join('');
@@ -1155,8 +1165,12 @@
 
   function renderCalcOptions(){
     var select = document.getElementById('calcVehicle');
-    select.innerHTML = VEHICLES.map(function(v){
-      return '<option value="' + v.id + '"' + (v.isDefault ? ' selected' : '') + '>' +
+    var available = VEHICLES.filter(function(v){ return v.available !== false; });
+    if (available.length === 0) { select.innerHTML = ''; return; }
+    var hasDefault = available.some(function(v){ return v.isDefault; });
+    select.innerHTML = available.map(function(v, i){
+      var selected = hasDefault ? v.isDefault : i === 0;
+      return '<option value="' + v.id + '"' + (selected ? ' selected' : '') + '>' +
         v.name + ' (' + v.years + ') — ' + fmt(v.price) + '/wk</option>';
     }).join('');
   }
@@ -1173,6 +1187,7 @@
     var tKey = document.querySelector('input[name="tier"]:checked').value;
     var v = VEHICLES.find(function(x){ return x.id === vKey; });
     var t = tierData[tKey];
+    if (!v || !t) { return; }
     var weekly = v.price + t.addon;
     var deposit = v.price;
     var dueAtBooking = weekly + deposit;
