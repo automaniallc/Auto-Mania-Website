@@ -370,12 +370,12 @@
   .hero-aside .plate{margin-bottom:14px;}
 
   .road-banner{padding-block:0;line-height:0;position:relative;overflow:hidden;}
-  .road-banner svg{display:block;width:100%;height:clamp(110px,26vw,320px);}
+  .road-banner svg{display:block;width:100%;height:clamp(110px,26vw,380px);}
   @media (max-width:560px){.road-banner svg{height:100px;}}
   .road-car-img{
     position:absolute;left:44%;bottom:9%;height:58%;width:auto;
     transform:translateX(0);
-    animation:roadCarImgIn 1.3s cubic-bezier(.19,.85,.32,1) .15s both;
+    animation:roadCarImgIn 3.2s cubic-bezier(.25,.7,.35,1) .15s both;
   }
   @keyframes roadCarImgIn{
     from{transform:translateX(160%);}
@@ -675,7 +675,7 @@
   </section>
 
   <section class="road-banner" aria-hidden="true">
-    <svg viewBox="0 0 1200 380" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 2000 380" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#0B3B33"/>
@@ -683,25 +683,25 @@
           <stop offset="100%" stop-color="#1F8F71"/>
         </linearGradient>
       </defs>
-      <rect x="0" y="0" width="1200" height="380" fill="url(#skyGrad)"/>
-      <circle cx="1030" cy="80" r="42" fill="#3ED6A8" opacity="0.5"/>
+      <rect x="0" y="0" width="2000" height="380" fill="url(#skyGrad)"/>
+      <circle cx="1430" cy="80" r="42" fill="#3ED6A8" opacity="0.5"/>
       <g fill="#081815">
-        <rect x="30" y="205" width="52" height="92"/>
-        <rect x="92" y="165" width="36" height="132"/>
-        <rect x="138" y="122" width="46" height="175"/>
-        <rect x="145" y="102" width="14" height="24"/>
-        <rect x="150" y="86" width="4" height="18"/>
-        <rect x="194" y="180" width="30" height="117"/>
-        <rect x="234" y="145" width="56" height="152"/>
-        <rect x="300" y="195" width="38" height="102"/>
+        <rect x="430" y="205" width="52" height="92"/>
+        <rect x="492" y="165" width="36" height="132"/>
+        <rect x="538" y="122" width="46" height="175"/>
+        <rect x="545" y="102" width="14" height="24"/>
+        <rect x="550" y="86" width="4" height="18"/>
+        <rect x="594" y="180" width="30" height="117"/>
+        <rect x="634" y="145" width="56" height="152"/>
+        <rect x="700" y="195" width="38" height="102"/>
       </g>
-      <rect x="0" y="297" width="1200" height="83" fill="#0F1E1B"/>
-      <line x1="0" y1="337" x2="1200" y2="337" stroke="#E8F3F0" stroke-width="5" stroke-dasharray="42 32" opacity="0.8"/>
-      <ellipse cx="664" cy="300" rx="128" ry="11" fill="#050C0A" opacity="0.4"/>
+      <rect x="0" y="297" width="2000" height="83" fill="#0F1E1B"/>
+      <line x1="0" y1="337" x2="2000" y2="337" stroke="#E8F3F0" stroke-width="5" stroke-dasharray="42 32" opacity="0.8"/>
+      <ellipse cx="1064" cy="300" rx="128" ry="11" fill="#050C0A" opacity="0.4"/>
       <g stroke="#3ED6A8" stroke-width="5" stroke-linecap="round" opacity="0.55">
-        <line x1="395" y1="223" x2="465" y2="223"/>
-        <line x1="385" y1="246" x2="455" y2="246"/>
-        <line x1="400" y1="269" x2="460" y2="269"/>
+        <line x1="795" y1="223" x2="865" y2="223"/>
+        <line x1="785" y1="246" x2="855" y2="246"/>
+        <line x1="800" y1="269" x2="860" y2="269"/>
       </g>
     </svg>
     <img class="road-car-img" src="images/road-banner-car.png" alt="">
