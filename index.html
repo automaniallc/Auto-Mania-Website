@@ -336,16 +336,8 @@
 
   /* ---------- hero ---------- */
   .hero{padding-block:64px 32px;position:relative;overflow:hidden;}
-  .hero::before,.hero::after{
-    content:'';position:absolute;width:520px;height:520px;border-radius:50%;
-    background:radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
-    pointer-events:none;z-index:0;opacity:.8;
-  }
-  .hero::before{left:-220px;top:-160px;}
-  .hero::after{right:-220px;bottom:-220px;}
-  @media (max-width:1000px){ .hero::before,.hero::after{display:none;} }
   .hero .wrap{
-    display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start;
+    display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:stretch;
     max-width:1560px;margin-inline:auto;
     position:relative;z-index:1;
   }
@@ -407,10 +399,12 @@
   }
   @media (max-width:1100px){.hero-aside::after{display:none;}}
   .hero-photo{
-    position:relative;border-radius:16px;overflow:hidden;margin-bottom:16px;
-    background:var(--accent-soft);z-index:1;aspect-ratio:4/3;
+    position:relative;border-radius:16px;overflow:hidden;
+    background:var(--accent-soft);z-index:1;
+    height:100%;min-height:340px;
   }
   .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block;}
+  @media (max-width:900px){ .hero-photo{height:auto;aspect-ratio:4/3;min-height:0;} }
   .hero-photo-badge{
     position:absolute;top:12px;right:12px;max-width:190px;
     background:var(--surface);border-radius:12px;box-shadow:var(--shadow);
@@ -419,8 +413,6 @@
   }
   .hero-photo-badge svg{width:16px;height:16px;color:var(--accent);flex:none;margin-top:1px;}
   @media (max-width:1100px){.hero-photo-badge{display:none;}}
-
-  .hero-aside .plate{margin-bottom:14px;}
 
   /* ---------- hero trust bar ---------- */
   .hero-trustbar{background:#0F2E27;padding-block:44px;}
@@ -760,26 +752,6 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             Illinois liability insurance included on every lease
           </span>
-        </div>
-        <span class="plate">AM · LEASE ESTIMATE</span>
-        <div class="sticker" style="margin-top:14px;">
-          <div class="sticker-head">
-            <h3 style="font-size:1.1rem;">Toyota Prius</h3>
-            <span>SAMPLE</span>
-          </div>
-          <div class="sticker-row"><span>Weekly rate</span><span class="leader"></span><span class="val">$259/wk</span></div>
-          <div class="sticker-row"><span>Liability insurance</span><span class="leader"></span><span class="val">Included</span></div>
-          <div class="sticker-row"><span>Security deposit</span><span class="leader"></span><span class="val">$259</span></div>
-          <div class="sticker-row"><span>Mileage</span><span class="leader"></span><span class="val">1,000 mi/wk</span></div>
-          <div class="sticker-row"><span>Minimum term</span><span class="leader"></span><span class="val">4 weeks</span></div>
-          <div class="sticker-total">
-            <div>
-              <div class="amt">$518<span class="per">due at pickup</span></div>
-              <div class="per">then $259/wk after minimum</div>
-              <div class="per" style="color:var(--accent);margin-top:2px;">Unlimited mileage available</div>
-            </div>
-            <a class="btn btn-ghost" href="#insurance-pricing" style="padding:9px 16px;font-size:.82rem;">Add coverage</a>
-          </div>
         </div>
       </aside>
     </div>
