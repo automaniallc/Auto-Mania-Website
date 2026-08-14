@@ -431,44 +431,22 @@
   }
 
   /* ---------- insurance ---------- */
-  .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;}
-  @media (max-width:900px){.tier-grid{grid-template-columns:1fr;}}
-  .tier-card{
-    background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:22px;
-    cursor:pointer;position:relative;transition:border-color .15s ease;
+  .tier-pill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  @media (max-width:640px){.tier-pill-grid{grid-template-columns:1fr;}}
+  .tier-pill{
+    background:var(--bg);border:1.5px solid var(--line);border-radius:9px;padding:10px 12px;
+    cursor:pointer;position:relative;display:flex;flex-direction:column;gap:2px;transition:border-color .15s ease;
   }
-  @media (prefers-reduced-motion: reduce){ .tier-card{transition:none;} }
-  .tier-card:hover{border-color:var(--accent);}
-  .tier-card input{position:absolute;opacity:0;pointer-events:none;}
-  .tier-card input:checked ~ .tier-mark{border-color:var(--accent);background:var(--accent);}
-  .tier-card input:checked ~ .tier-mark::after{opacity:1;}
-  .tier-card:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
-  .tier-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
-  .tier-mark{
-    width:19px;height:19px;border-radius:50%;border:2px solid var(--line);flex:none;position:relative;
-  }
-  .tier-mark::after{
-    content:"";position:absolute;inset:4px;border-radius:50%;background:#fff;opacity:0;
-  }
-  .tier-badge{
-    font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
-    color:var(--warn);background:var(--warn-soft);padding:3px 8px;border-radius:5px;
-  }
-  .tier-card h3{font-size:1.1rem;text-transform:none;margin-bottom:4px;}
-  .tier-add{font-family:var(--font-mono);font-weight:700;color:var(--accent-strong);margin-bottom:10px;display:block;font-size:1.1rem;}
-  .tier-card ul{color:var(--ink-muted);font-size:.85rem;display:flex;flex-direction:column;gap:5px;}
-  .tier-card ul li::before{content:"— ";color:var(--ink-muted);}
+  @media (prefers-reduced-motion: reduce){ .tier-pill{transition:none;} }
+  .tier-pill:hover{border-color:var(--accent);}
+  .tier-pill input{position:absolute;opacity:0;pointer-events:none;}
+  .tier-pill:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft);}
+  .tp-name{font-weight:700;font-size:.85rem;}
+  .tp-add{font-family:var(--font-mono);font-size:.78rem;color:var(--accent-strong);}
+  .tp-note{font-size:.72rem;color:var(--ink-muted);}
 
-  .calc-details{margin-top:28px;}
-  .calc-details summary{
-    cursor:pointer;font-weight:700;font-size:1rem;list-style:none;
-    display:flex;align-items:center;gap:10px;color:var(--accent-strong);
-  }
-  .calc-details summary::-webkit-details-marker{display:none;}
-  .calc-details summary .plus{font-family:var(--font-mono);font-size:1.2rem;transition:transform .15s ease;}
-  .calc-details[open] summary .plus{transform:rotate(45deg);}
   .calc{
-    margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:16px;
+    margin-top:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;
     padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;
   }
   @media (max-width:800px){.calc{grid-template-columns:1fr;padding:24px;}}
@@ -753,55 +731,37 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Insurance &amp; pricing</h2>
-        <p>Illinois liability coverage is included on every lease. Add full coverage for more protection.</p>
+        <p>Illinois liability coverage is included on every lease. Pick your vehicle, coverage, and mileage below to see your exact price — updates live.</p>
       </div>
 
-      <div class="tier-grid" role="radiogroup" aria-label="Insurance coverage tier">
-        <label class="tier-card">
-          <input type="radio" name="tier" value="liability" data-addon="0" checked>
-          <div class="tier-top"><span class="tier-mark"></span><span class="tier-badge">Included</span></div>
-          <h3>Liability Only</h3>
-          <span class="tier-add">+$0/wk</span>
-          <ul>
-            <li>Meets Illinois state minimum</li>
-            <li>Covers damage/injury to others</li>
-            <li>Standard on every lease</li>
-          </ul>
-        </label>
-
-        <label class="tier-card">
-          <input type="radio" name="tier" value="standard" data-addon="45">
-          <div class="tier-top"><span class="tier-mark"></span><span class="tier-badge">Popular add-on</span></div>
-          <h3>Full Coverage — Standard</h3>
-          <span class="tier-add">+$45/wk</span>
-          <ul>
-            <li>Collision &amp; comprehensive</li>
-            <li>$1,000 deductible</li>
-            <li>Covers damage to your leased vehicle</li>
-          </ul>
-        </label>
-
-        <label class="tier-card">
-          <input type="radio" name="tier" value="plus" data-addon="65">
-          <div class="tier-top"><span class="tier-mark"></span><span class="tier-badge">Most protection</span></div>
-          <h3>Full Coverage — Plus</h3>
-          <span class="tier-add">+$65/wk</span>
-          <ul>
-            <li>Collision &amp; comprehensive</li>
-            <li>$500 deductible</li>
-            <li>24/7 roadside assistance</li>
-          </ul>
-        </label>
-      </div>
-      <p class="pricing-note">Prices above are starting estimates — final rate depends on insurance approval. Rideshare/delivery use typically costs more to insure than personal driving.</p>
-
-      <details class="calc-details">
-        <summary>Calculate your exact price <span class="plus">+</span></summary>
       <div class="calc">
         <div>
           <div class="calc-field">
             <label for="calcVehicle">Vehicle</label>
             <select id="calcVehicle"></select>
+          </div>
+          <div class="calc-field">
+            <label>Coverage tier</label>
+            <div class="tier-pill-grid" role="radiogroup" aria-label="Insurance coverage tier">
+              <label class="tier-pill">
+                <input type="radio" name="tier" value="liability" data-addon="0" checked>
+                <span class="tp-name">Liability Only</span>
+                <span class="tp-add">Included</span>
+                <span class="tp-note">IL state minimum</span>
+              </label>
+              <label class="tier-pill">
+                <input type="radio" name="tier" value="standard" data-addon="45">
+                <span class="tp-name">Full Coverage Standard</span>
+                <span class="tp-add">+$45/wk</span>
+                <span class="tp-note">$1,000 deductible</span>
+              </label>
+              <label class="tier-pill">
+                <input type="radio" name="tier" value="plus" data-addon="65">
+                <span class="tp-name">Full Coverage Plus</span>
+                <span class="tp-add">+$65/wk</span>
+                <span class="tp-note">$500 ded. + roadside</span>
+              </label>
+            </div>
           </div>
           <div class="calc-field">
             <label>Mileage plan</label>
@@ -828,7 +788,7 @@
               </label>
             </div>
           </div>
-          <p style="font-size:.85rem;color:var(--ink-muted);">Pick a vehicle, coverage tier, and mileage plan — your estimate updates on the right.</p>
+          <p class="pricing-note" style="text-align:left;margin:14px 0 0;max-width:none;">Prices are starting estimates — final rate depends on insurance approval. Rideshare/delivery use typically costs more to insure than personal driving.</p>
         </div>
         <div class="sticker" id="calcSticker">
           <div class="sticker-head">
@@ -849,7 +809,6 @@
           </div>
         </div>
       </div>
-      </details>
     </div>
   </section>
 
