@@ -389,6 +389,7 @@
   .how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px;}
   @media (max-width:900px){.how-grid{grid-template-columns:1fr 1fr;}}
   @media (max-width:560px){.how-grid{grid-template-columns:1fr;}}
+  .how-step{position:relative;}
   .how-step .num{
     font-family:var(--font-display);font-size:2.6rem;color:var(--accent-soft);
     -webkit-text-stroke:1.5px var(--accent);
@@ -396,6 +397,25 @@
   }
   .how-step h3{font-size:1.05rem;text-transform:none;margin-bottom:8px;}
   .how-step p{color:var(--ink-muted);font-size:.92rem;}
+  .how-step:not(:last-child)::after{
+    content:'';
+    position:absolute;top:20px;right:-30px;width:20px;height:20px;
+    background:var(--accent);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h13M13 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h13M13 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+    animation:howArrowNudge 1.6s ease-in-out infinite;
+  }
+  .how-step:nth-child(1)::after{animation-delay:0s;}
+  .how-step:nth-child(2)::after{animation-delay:.2s;}
+  .how-step:nth-child(3)::after{animation-delay:.4s;}
+  @keyframes howArrowNudge{
+    0%,100%{transform:translateX(0);opacity:.55;}
+    50%{transform:translateX(5px);opacity:1;}
+  }
+  @media (max-width:900px){.how-step::after{display:none;}}
+  @media (prefers-reduced-motion: reduce){.how-step::after{animation:none;opacity:.8;}}
+
+  .why-then-how{margin-top:56px;}
 
   .section-head{max-width:640px;margin-bottom:8px;}
   .section-head h2{font-size:clamp(1.9rem,3vw + .8rem,2.8rem);margin-bottom:14px;}
@@ -705,6 +725,28 @@
   <section id="how-it-works">
     <div class="wrap">
       <div class="section-head">
+        <h2>Why lease with Auto Mania</h2>
+        <p>We're not a national chain — we're a Des Plaines shop that knows Chicagoland roads and Chicagoland drivers.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <h3>Insurance included</h3>
+          <p>Illinois liability coverage on every lease, no separate policy to arrange.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <h3>Flexible terms after 4 weeks</h3>
+          <p>4-week minimum, then week to week. Step away whenever your plans change.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          <h3>Same-day approval</h3>
+          <p>Bring your license and income proof — most drivers are approved the same day.</p>
+        </div>
+      </div>
+
+      <div class="section-head why-then-how">
         <h2>How leasing works</h2>
         <p>Four steps, most of them done before your coffee's cold.</p>
       </div>
@@ -835,32 +877,6 @@
         </div>
       </div>
       </details>
-    </div>
-  </section>
-
-  <section class="section-alt">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Why lease with Auto Mania</h2>
-        <p>We're not a national chain — we're a Des Plaines shop that knows Chicagoland roads and Chicagoland drivers.</p>
-      </div>
-      <div class="why-grid">
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <h3>Insurance included</h3>
-          <p>Illinois liability coverage on every lease, no separate policy to arrange.</p>
-        </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-          <h3>Flexible terms after 4 weeks</h3>
-          <p>4-week minimum, then week to week. Step away whenever your plans change.</p>
-        </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-          <h3>Same-day approval</h3>
-          <p>Bring your license and income proof — most drivers are approved the same day.</p>
-        </div>
-      </div>
     </div>
   </section>
 
